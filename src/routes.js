@@ -3,7 +3,7 @@ import Admin from "./pages/Admin"
 import Basket from "./pages/Basket";
 import Auth from "./pages/Auth"
 import Shop from "./pages/Shop"
-import { ADMIN_Route , SHOP_Route, LOGIN_Route , REGISTRATION_Route ,BASKET_Route } from "./utils/consts";
+import { ADMIN_Route , SHOP_Route, LOGIN_Route , REGISTRATION_Route ,BASKET_Route } from "./utils/constants";
 
 export const authRoutes = [
     {

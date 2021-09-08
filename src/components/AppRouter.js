@@ -1,29 +1,30 @@
 import React, { useContext } from "react";
-import {Switch ,Route ,Redirect } from "react-router-dom";
-import { authRoutes , publicRoutes} from "../routes";
-import { SHOP_Route } from "../utils/consts";
-import { Context } from "../index";
+import { Switch, Route, Redirect } from "react-router-dom";
+import {observer} from "mobx-react-lite"
+
+import { authRoutes, publicRoutes } from "../routes";
+import { SHOP_Route } from "../utils/constants";
+import { Context } from "../context";
 
 
+const AppRouter = () => {
+  const { user } = useContext(Context);
+  
 
-const AppRouter = () =>{
-    const {user} = useContext(Context)
-    console.log(user)
-    return(
+  return (
+
     <Switch>
-        {
-           user.isAuth && authRoutes.map(({path ,Component}) =>
-                <Route key={path} path={path} component ={Component} exact/>
-            )
-        }
-        {
-           publicRoutes.map(({path ,Component}) =>
-                <Route key={path} path={path} component ={Component} exact/>
-            )
-        }
-        <Redirect to = {SHOP_Route}/>
-     </Switch>
-    );
-}
+      {user.isAuth &&
+        authRoutes.map(({ path, Component }) => (
+          <Route key={path} path={path} component={Component} exact />
+        ))}
+      {publicRoutes.map(({ path, Component }) => (
+        <Route key={path} path={path} component={Component} exact />
+      ))}
+      <Redirect to={SHOP_Route} />
+    </Switch>
 
-export default AppRouter;
+  );
+};
+
+export default observer(AppRouter);

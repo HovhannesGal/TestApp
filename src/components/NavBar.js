@@ -1,38 +1,60 @@
 import React, { useContext } from "react";
-import { Context } from "../index";
-import "../App.css"
+import { Context } from "../context";
+import "../App.css";
 import { Link } from "react-router-dom";
-import { observer } from "mobx-react-lite";
+import {observer} from "mobx-react-lite"
 
-const NavBar = observer( () => {
-        const {user} = useContext(Context)
-    return(
-        <div>
-        
-        {user.isAuth ?
-        <div className= "kar"><Link to="/" style={{color:"white",textDecoration:"none" ,marginRight:"70%",}}>G-Project</Link>
-        <button className="btnNav" style={{marginRight: 5}}>Register</button>
-        <button className="btnNav" style={{marginRight: 5}}>login</button>
-        <button className="btnNav" style={{marginRight: 10}}></button>
-        
+const NavBar = () => {
+  const { user } = useContext(Context);
+  return (
+    <div>
+      <div className="kar">
+        <Link
+          to="/Shop"
+          style={{ color: "white", textDecoration: "none", marginLeft: "10px" }}
+        >
+          G-Project
+        </Link>
+
+        {user._isAuth ?
+        <div className="btnPack">
+          <button className="btnNav" style={{ marginRight: 5 }}>
+            <Link to="/auth" style={{ color: "black", textDecoration: "none" }}>
+              Register
+            </Link>
+          </button>
+          <button className="btnNav" style={{ marginRight: 5 }}>
+            <Link
+              to="/Admin"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              Admin Panel
+            </Link>
+
+          </button>
         </div>
-        
         :
-        <div className= "kar"><Link to="/" style={{color:"white",textDecoration:"none" ,marginRight:"70%",}}>G-Project</Link>
-        <button className="btnNav" style={{marginRight: 5}}>Register</button>
-        <button className="btnNav" style={{marginRight: 5}}>login</button>
-        <button className="btnNav" style={{marginRight: 10}}></button>
-        
+        <div className="btnPack">
+          <button className="btnNav" style={{ marginRight: 5 }}>
+            <Link to="/auth" style={{ color: "black", textDecoration: "none" }}>
+              Авторизация
+            </Link>
+          </button>
+         
+          <button className="btnNav" style={{ marginRight: 5 }}>
+            <Link
+              to="/auth"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              Регистрация
+            </Link>
+
+          </button>
         </div>
+}
+      </div>
+    </div>
+  );
+};
 
-
-        }
-        
-        </div>
-        
-    )
-
-   
-});
-
-export default NavBar;
+export default observer(NavBar);
